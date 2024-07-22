@@ -1,0 +1,62 @@
+<div class="container-fluid"
+     id="home">
+    <div class="row">
+
+        <div class="col-12 col-md-6 offset-md-3">
+            <mat-card>
+                <mat-card-title style="font-weight: 700;font-size: 18px;">User Info</mat-card-title>
+                <mat-card-header>
+                    <mat-card-subtitle></mat-card-subtitle>
+                </mat-card-header>
+                <ng-container>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-sm-12 info-alignment justify-content-center">
+                                <mat-icon class="account">account_circle</mat-icon>
+                                <div class="justify-content-center">
+                                    <span class="info-content text-muted" style="font-weight: 700;font-size: 18px;">{{user?.currentuser?.firstName}}
+                                        {{user?.currentuser?.lastName}}</span>
+                                </div>
+                                <div class="justify-content-center">
+                                    <span class="info-content">{{user?.currentuser?.email}}
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-around user-summary">
+                                    <div class="user-summary__section">
+                                        <label class="text-muted">User since</label>
+                                        <div class="info-content">{{user?.loginDetails?.metadata?.createdAt |
+                                            date:'mediumDate'}}</div>
+                                    </div>
+
+                                    <div class="divider"></div>
+
+                                    <div class="user-summary__section">
+                                        <label class="text-muted">Expenses logged</label>
+                                        <div class="info-content">{{user?.expenseLength || 0}}</div>
+                                    </div>
+
+                                    <div class="divider"></div>
+
+                                    <div class="user-summary__section">
+                                        <label class="text-muted">Last login</label>
+                                        <div class="info-content">{{user?.loginDetails?.metadata?.lastLoginAt |
+                                            date:'mediumDate'}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                    </mat-card-actions>
+                </ng-container>
+            </mat-card>
+        </div>
+
+
+    </div>
+</div>
+
+<div *ngIf="isLoading"
+     class="spinner-container">
+    <mat-spinner [diameter]="40"></mat-spinner>
+</div>

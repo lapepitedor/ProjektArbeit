@@ -1,0 +1,71 @@
+<div class="container-fluid"
+     id="view-expense">
+    <div *ngIf="isLoadingExpenses"
+         class="spinner-container">
+        <mat-spinner [diameter]="40"></mat-spinner>
+    </div>
+    <mat-card class="h-100 ">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sm-12 d-flex justify-content-between align-content-center align-items-center">
+                    <div style="font-size: 20px;font-weight: bold;">
+                        Search
+                    </div>
+           
+                    <mat-form-field>
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate
+                                   [(ngModel)]="startDate"
+                                   (dateChange)="valueChanged($event)"
+                                   placeholder="Start date">
+                            <input matEndDate
+                                   [(ngModel)]="endDate"
+                                   (dateChange)="valueChanged($event)"
+                                   placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix
+                                               [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <app-card [cardConfig]="cardConfig"></app-card>
+
+    <ng-container>
+
+        <div class="row">
+            <div class="col-md-3 col-sm-12 mb-5"
+                 *ngFor="let item of metrics">
+                <app-number-cards [data]="item"></app-number-cards>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-5 col-md-12 col-sm-12">
+                <mat-card class="h-100 ">
+                    <mat-card-content>
+                        <app-category-summary-chart [data]="expenseDataChart"
+                                                    [date]="categoryDate"
+                                                    [categories]="categories"></app-category-summary-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="mb-5 col-md-12 col-sm-12">
+                <mat-card class="h-100 ">
+                    <mat-card-content>
+                        <app-monthly-summary-chart [data]="expenseDataTable"
+                                                   [date]="date"
+                                                   [categories]="categories"></app-monthly-summary-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

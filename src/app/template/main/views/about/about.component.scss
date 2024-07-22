@@ -1,0 +1,46 @@
+#home {
+    $primary: #2196f3;
+
+    .account {
+        font-size: 80px;
+        color: $primary;
+    }
+
+    label {
+        padding-top: 20px;
+        font-weight: bold;
+    }
+
+    .info-alignment {
+        text-align: center;
+    }
+
+    .info-content {
+        font-size: 18px;
+        font-weight: 100;
+    }
+
+    .user-summary {
+        .user-summary__section {
+            padding: 0 20px;
+        }
+
+        .divider {
+            border-left: 1px solid rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .mat-icon {
+        width: inherit;
+    }
+}
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-mdc-form-field {
+    width: 100%;
+}
+.mat-icon {
+    height: 50%;
+}

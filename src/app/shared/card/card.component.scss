@@ -1,0 +1,25 @@
+.cards {
+    gap: 20px;
+    padding: 10px !important;
+    margin-bottom: 0px !important;
+    .card {
+        border-radius: 5px;
+        border: none;
+        padding: 40px 30px;
+
+        .card-detail {
+            padding-left: 10px;
+            text-align: center;
+            .count{
+                font-size: 24px;
+                font-weight: 700;
+            }
+            h6 {
+                font-size: 16px;
+                margin-top: 5px;
+                margin-bottom: 0px;
+                color: #717171;
+            }
+        }
+    }
+}

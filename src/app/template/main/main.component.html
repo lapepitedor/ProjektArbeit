@@ -1,0 +1,15 @@
+<mat-sidenav-container class="example-container"
+                       style="height: 100vh;"
+                       (backdropClick)="toggleSidePanel('over')">
+    <mat-sidenav #sidenav
+                 [mode]="mode"
+                 [opened]="openSidenav"
+                 style="width: 272px; border: 0px;">
+        <app-side-panel />
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="panel-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

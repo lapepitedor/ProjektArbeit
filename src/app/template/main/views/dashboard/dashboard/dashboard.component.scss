@@ -1,0 +1,41 @@
+#view-expense {
+    background-color: #f9f9f9;
+    padding-top: 20px;
+  chart {
+    width: 100% !important;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  button.fab {
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 100;
+  }
+
+  .month-date-picker{
+    font-size: 14px;
+    width: 40%;
+  }
+
+  .no-data {
+
+    .mat-icon {
+      width: auto;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  }
+
+}
+.spacer {
+  flex: 1 1 auto;
+}
+

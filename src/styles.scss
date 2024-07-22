@@ -1,0 +1,188 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@use '@angular/material' as mat;
+
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$expense-tracking-primary: mat.define-palette(mat.$indigo-palette);
+$expense-tracking-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$expense-tracking-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$expense-tracking-theme: mat.define-light-theme((
+  color: (
+    primary: $expense-tracking-primary,
+    accent: $expense-tracking-accent,
+    warn: $expense-tracking-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($expense-tracking-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+$material-blue: #2196f3;
+
+html {
+  height: 100%;
+
+  body {
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    background-color: #EEEEEE;
+
+    #content {
+      margin-top: 5%;
+    }
+
+    .cdk-overlay-pane {
+      margin-bottom: 60px !important;
+    }
+
+    .mat-input-container, .mat-form-field {
+      width: 100%;
+    }
+
+    .z-depth-1 {
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    }
+
+    .z-depth-1-half {
+      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .z-depth-2 {
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    .z-depth-3 {
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    }
+
+    .z-depth-4 {
+      box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .z-depth-5 {
+      box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .mat-select {
+      width: 100%;
+    }
+
+    button:focus {
+      outline: none;
+    }
+
+    .mat-card:not([class*=mat-elevation-z]) {
+      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+      border-radius: 0;
+    }
+
+    .no-data {
+      .icon {
+        text-align: center;
+      }
+
+      .icon-alert {
+        font-size: 80px;
+      }
+
+      h2, h6 {
+        text-align: center;
+        font-weight: 300;
+      }
+
+      .alert-action {
+        text-align: center;
+        margin-top: 15px;
+      }
+
+    }
+
+    mat-card {
+      margin-bottom: 40px;
+    }
+
+    .button-row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    chart {
+      display: block;
+    }
+
+    .no-data {
+      h2 {
+        text-align: center;
+      }
+    }
+
+  }
+
+}
+
+mat-card-title{
+  &:hover {
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+  &:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+}
+
+.mat-mdc-card-title {
+  display: block;
+  margin: 0;
+  font-weight: 500 !important;
+}
+.mat-mdc-card {
+  padding: 15px !important;
+}
+
+mat-error{
+    font-size: 10px;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8); 
+    z-index: 1000;
+}
+
+tr.mat-mdc-row:hover {
+    background-color: #c7c6c6;
+}
+
+th{
+    font-weight: 700 !important;
+}

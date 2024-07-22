@@ -1,0 +1,56 @@
+<div class="sidebar mat-elevation-z4">
+    <div class="side-bar-heading">
+        <h4>EXPENSE TRACKER</h4>
+    </div>
+
+    <ul class="list">
+        <div class="side-details">
+            <div class="profile-image">
+                <span class="material-icons account">account_circle</span>
+            </div>
+            <h6 class="text-gray">{{firstName}} {{lastName}}</h6>
+            <h6 class="text-gray"
+                style="font-size: 14px;font-weight: 400;">{{email}}</h6>
+        </div>
+        
+        <hr>
+        <div class="mt-5">
+            <ng-container *ngFor="let item of menus">
+                <li class="menu-item"
+                    [routerLinkActive]="'active'"
+                    [ngClass]="!item.visibility ? 'd-none' : ''"
+                    [routerLink]="item.route"
+                    (click)="onClickSubMenu(item.label)">
+                   
+                    <div class="menu-label">
+                        {{item.label}}
+                    </div>
+                </li>
+                <ng-container *ngIf="item.childMenu">
+                    <li class="menu-item sub-menu-item"
+                        *ngFor="let childItem of item.childs"
+                        [routerLinkActive]="'active'"
+                        [ngClass]="!childItem.visibility ? 'd-none' : ''"
+                        [routerLink]="childItem.route">
+                        <div class="sub-menu-label">
+                            {{childItem.label}}
+                        </div>
+                    </li>
+                </ng-container>
+            </ng-container>
+        </div>
+
+    </ul>
+    <hr>
+    <ul class="list logout-list">
+        <ng-container>
+            <li class="wallet"
+                style="cursor: pointer;"
+                (click)="onLogout()">
+                <div class="menu-label">
+                    Logout
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+</div>

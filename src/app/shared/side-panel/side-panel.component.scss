@@ -1,0 +1,123 @@
+.sidebar {
+    width: 250px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100vh;
+    overflow-y: auto;
+
+    .side-bar-heading {
+        background-color: #ececf2;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+
+        h4 {
+            color: #2196f3;
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+    }
+
+    .list {
+        padding: 8px;
+        margin: 0;
+        list-style: none;
+        .wallet {
+            border: 1px solid rgb(217, 215, 215);
+            margin: 8px 10%;
+            padding: 5px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            gap: 10px;
+            background-color: rgb(233, 233, 233);
+            .amount {
+                font-size: 16px;
+            }
+        }
+
+        .side-details {
+            padding: 16px 0;
+            text-align: center;
+
+            .account {
+                font-size: 70px;
+                color: #2196f3;
+            }
+
+            h6 {
+                margin: 4px 0;
+            }
+
+            .text-gray {
+                color: gray;
+            }
+        }
+
+        .menu-item {
+            cursor: pointer;
+            margin: 8px 0;
+            padding: 10px 8px;
+            display: flex;
+            align-items: center;
+            border-radius: 40px;
+            justify-content: center;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #f0f0f0;
+            }
+
+            &.active {
+                background-color: #2196f3;
+                color: white;
+
+                .material-icons {
+                    color: white;
+                }
+            }
+
+            .material-icons {
+                margin-right: 8px;
+                color: #2196f3;
+            }
+
+            .menu-label {
+                display: flex;
+                // justify-content: space-between;
+                
+                // width: 100%;
+            }
+        }
+
+        .sub-menu-item {
+            padding-left: 42px;
+            font-size: 17px;
+
+            .sub-menu-label {
+                padding: 10px 0;
+            }
+        }
+
+        .d-none {
+            display: none;
+        }
+    }
+
+    .logout-list {
+        padding: 8px;
+        margin-top: auto;
+    }
+
+    .menu-label {
+        font-weight: 500;
+    }
+}
