@@ -72,11 +72,6 @@ export class LoginComponent implements OnInit
         return this.loginForm.get(control)
     }
 
-    scrollToLogin()
-    {
-        const element = document.getElementById('target');
-        element?.scrollIntoView();
-    }
 
     scrollTop()
     {

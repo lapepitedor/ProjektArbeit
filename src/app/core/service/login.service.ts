@@ -28,10 +28,6 @@ export class LoginService {
     });
   }
 
-  // isLoggedIn(): boolean {
-  //   return this.currentUser !== null;
-  // }
-
   updateCurrentUser(userUpdatedInfos: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       const user = this.afAuth.currentUser.then((user) => {

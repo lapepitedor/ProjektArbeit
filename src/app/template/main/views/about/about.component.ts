@@ -36,7 +36,7 @@ export class AboutComponent implements OnInit
     {
         this.loginService.getCurrentUser().then(user =>
         {
-            this.user.loginDetails = user; // this will get login details lastLogin and Created At
+            this.user.loginDetails = user; 
         })
 
         let users = await this.getList(`users`);

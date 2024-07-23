@@ -3,8 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-
 import { Firestore, addDoc, collection, getDocs, query, deleteDoc, updateDoc, getDoc, doc } from '@angular/fire/firestore';
 import { LoginService } from 'src/app/core/service/login.service';
 import { expense_categories, expense_types } from 'src/app/shared/constants/expense-constants';
@@ -40,7 +38,6 @@ export class AddComponent implements OnInit
 
     ngOnInit()
     {
-        // this.categories = this.loginService.getCurrentCategories();
         this.userId = this.loginService.getUserId();
         console.log("categories", this.categories);
         if (this.type == 'edit')
@@ -49,12 +46,12 @@ export class AddComponent implements OnInit
         }
     }
 
-    updateExpenseCategories(category: string)
-    {
-        this.categories = this.loginService.getCurrentCategories();
-    }
+    // updateExpenseCategories(category: string)
+    // {
+    //     this.categories = this.loginService.getCurrentCategories();
+    // }
 
-    async saveExpenseEntry()
+    async saveCategoryEntry()
     {
         this.isLoading = true;
         const categoryObj = this.categoryForm.value;
@@ -72,7 +69,6 @@ export class AddComponent implements OnInit
             await updateDoc(docRef, categoryObj);
         }
 
-        console.log("Document written with ID: ", docRef.id);
         this.showSnackBar()
 
         this.dialogRef.close(docRef.id);
@@ -88,7 +84,7 @@ export class AddComponent implements OnInit
     {
         if (this.categoryForm.valid)
         {
-            this.saveExpenseEntry();
+            this.saveCategoryEntry();
         }
     }
 

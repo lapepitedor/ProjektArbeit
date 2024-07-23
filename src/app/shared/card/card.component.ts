@@ -8,8 +8,6 @@ import { Component, Input } from '@angular/core';
 export class CardComponent
 {
     @Input() cardConfig: any;
-
-    //lang: string = localStorage.getItem('language')!;
    
     constructor()
     {

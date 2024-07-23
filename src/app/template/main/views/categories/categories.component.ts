@@ -4,19 +4,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddComponent } from './add/add.component';
-// import { getDocs, collection, doc, deleteDoc } from 'firebase/firestore';
-
 import { Firestore, addDoc, collection, getDocs, query, deleteDoc, updateDoc, getDoc, doc } from '@angular/fire/firestore';
 import { LoginService } from 'src/app/core/service/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { AngularFirestore } from '@angular/fire/compat/firestore/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Category } from 'src/app/core/models/Category';
 
-export interface Category
-{
-    id?: string;
-    name: string;
-}
 
 @Component({
     selector: 'app-categories',
@@ -30,9 +23,6 @@ export class CategoriesComponent
     @Input() displayColumns: string[] = ['name','actions'];
 
     categoriesData = new MatTableDataSource<Category>();
-
-    // categoriesData = new MatTableDataSource<any>();
-
     categoryDataTable: any[] = [];
     userId: string = '';
     isLoading: boolean = false;
@@ -43,8 +33,7 @@ export class CategoriesComponent
     {
         this.userId = this.loginService.getUserId();
         this.getCategories();
-        console.log("user id::", this.loginService.getUserId());
-
+       
     }
     async getCategories()
     {
@@ -52,16 +41,16 @@ export class CategoriesComponent
         let list = await getDocs(collection(this.afs.firestore, `users/${this.userId}/categories`));
         console.log(list.docs);
 
-        // this.parseData(list.docs);
         let result = []
         result = list.docs.map((d) => ({
             id: d.id,
             ...d.data()
         }))
-        console.log('>>> categories with static id', result);
+
         this.categoryDataTable = result
         this.updateList();
     }
+    
     updateList()
     {
         this.categoriesData = new MatTableDataSource<any>(this.categoryDataTable);

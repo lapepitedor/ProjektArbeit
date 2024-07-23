@@ -64,13 +64,11 @@ export class SidePanelComponent implements OnInit
         this.getAllUserDetails();
     }
     async getAllUserDetails()
-    {
+    {   
         if (this.loginService.getUser())
         {
             const userEmail: any = this.loginService.getUser()?.email;
             const userId: any = this.loginService.getUserId();
-
-            console.log('list.docslist.docslist.docslist.docslist.docs');
 
             this.firestore.collection('users').doc(userId).get().subscribe(res =>
             {

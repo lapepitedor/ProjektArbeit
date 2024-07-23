@@ -3,8 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-
 import { Firestore, addDoc, collection, getDocs, query, deleteDoc, updateDoc, getDoc, doc } from '@angular/fire/firestore';
 import { LoginService } from 'src/app/core/service/login.service';
 import { expense_types } from 'src/app/shared/constants/expense-constants';
@@ -47,8 +45,7 @@ export class AddComponent implements OnInit
     }
 
     ngOnInit()
-    {
-       
+    {      
         this.userId = this.loginService.getUserId();
     
         this.getCategories();
@@ -61,10 +58,11 @@ export class AddComponent implements OnInit
         }
     }
 
-    updateExpenseCategories(category: string)
-    {
-        this.categories = this.loginService.getCurrentCategories();
-    }
+    // updateExpenseCategories(category: string)
+    // {
+    //     debugger
+    //     this.categories = this.loginService.getCurrentCategories();
+    // }
 
     async getCategories()
     {
@@ -77,7 +75,7 @@ export class AddComponent implements OnInit
             id: d.id,
             ...d.data()
         }))
-        console.log('>>> categories with static id', result);
+
         this.categories = result;
 
         this.isLoading = false;
@@ -106,7 +104,6 @@ export class AddComponent implements OnInit
             await updateDoc(docRef, expenseObj);
         }
 
-        console.log("Document written with ID: ", docRef.id);
         this.showSnackBar()
 
         this.dialogRef.close(docRef.id);
@@ -114,7 +111,8 @@ export class AddComponent implements OnInit
 
     showSnackBar()
     {
-        let message = this.type == 'add' ? "Expense saved!" : "Expense updated!"
+        let message =
+          this.type == 'add' ? 'Transaction saved!' : 'Transaction updated!';
         this.snackBar.open(message, 'Ok', { duration: 2000 });
     }
 

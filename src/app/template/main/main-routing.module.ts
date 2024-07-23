@@ -17,7 +17,7 @@ const routes: Routes = [
       import('./views/categories/categories.module').then(
         (m) => m.CategoriesModule
       ),
-    canActivate: [AuthGuard],
+
   },
   {
     path: 'transaction',

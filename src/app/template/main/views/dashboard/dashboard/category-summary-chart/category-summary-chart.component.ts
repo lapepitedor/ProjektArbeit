@@ -1,7 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-// import { ChartEvent } from 'angular2-highcharts/dist/ChartEvent';
 import * as Highcharts from 'highcharts';
-// import { Expense } from 'src/app/core/models/expense-model';
 
 @Component({
     selector: 'app-category-summary-chart',

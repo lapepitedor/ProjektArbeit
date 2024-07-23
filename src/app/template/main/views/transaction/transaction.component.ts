@@ -35,21 +35,20 @@ export class TransactionComponent
     {
         this.userId = this.loginService.getUserId();
         this.getExpenses();
-        console.log("user id::", this.loginService.getUserId());
     }
+
     async getExpenses()
     {
         this.isLoading = true;
         let list = await getDocs(collection(this.afs.firestore, `users/${this.userId}/expenses`));
         console.log(list.docs);
 
-        // this.parseData(list.docs);
         let result = []
         result = list.docs.map((d) => ({
             id: d.id,
             ...d.data()
         }))
-        console.log('>>> expenses with static id', result);
+     
         this.expenseDataTable = result
         this.updateList();
     }
@@ -60,8 +59,6 @@ export class TransactionComponent
         this.expensesData.sort = this.sort;
         this.isLoading = false;
     }
-
-
 
     ngAfterViewInit()
     {
