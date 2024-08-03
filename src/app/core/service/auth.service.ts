@@ -52,13 +52,13 @@ export class AuthService {
     firstName: string,
     lastName: string
   ): Promise<void> {
-   return  this.afAuth
+    return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
         const additionalUserData = {
           firstName: firstName,
-            lastName: lastName,
-          email:email
+          lastName: lastName,
+          email: email,
         };
         if (result.user) {
           return this.db
@@ -100,6 +100,18 @@ export class AuthService {
   }
 
   checkLogin(): Promise<User> {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.onAuthStateChanged(function (user) {
+        if (user) {
+          resolve(user);
+        } else {
+          reject('No user logged in');
+        }
+      });
+    });
+  }
+
+  getCurrentUser(): Promise<User> {
     return new Promise<any>((resolve, reject) => {
       this.afAuth.onAuthStateChanged(function (user) {
         if (user) {

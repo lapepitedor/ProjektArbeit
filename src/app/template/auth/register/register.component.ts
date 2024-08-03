@@ -2,14 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { LoginService } from 'src/app/core/service/login.service';
-import { expense_categories } from 'src/app/shared/constants/expense-constants';
 
-import { Firestore, addDoc, collection, doc, getDocs, query, setDoc } from '@angular/fire/firestore';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { L } from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-register',

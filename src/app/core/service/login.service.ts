@@ -67,11 +67,11 @@ export class LoginService {
     return this.userId;
   }
 
-  setCategories(originalCategories: string[]) {
-    this.categories = originalCategories;
-  }
+  // setCategories(originalCategories: string[]) {
+  //   this.categories = originalCategories;
+  // }
 
-  getCurrentCategories(): string[] {
-    return this.categories;
-  }
+  // getCurrentCategories(): string[] {
+  //   return this.categories;
+  // }
 }
