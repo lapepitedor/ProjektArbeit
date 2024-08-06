@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private currentUser!: User ;
+  private currentUser!: User;
   private userId!: string;
   private categories!: string[];
   private userIdSet = new Subject<string>();
@@ -24,25 +24,6 @@ export class LoginService {
         } else {
           reject('No user logged in');
         }
-      });
-    });
-  }
-
-  updateCurrentUser(userUpdatedInfos: any): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      const user = this.afAuth.currentUser.then((user) => {
-        user
-          ?.updateProfile({
-            displayName: userUpdatedInfos.name,
-            photoURL: userUpdatedInfos.photoURL,
-          })
-          .then(
-            (res) => {
-              console.log(res);
-              return resolve(res);
-            },
-            (err) => reject(err)
-          );
       });
     });
   }
@@ -67,11 +48,30 @@ export class LoginService {
     return this.userId;
   }
 
-  // setCategories(originalCategories: string[]) {
-  //   this.categories = originalCategories;
-  // }
+  updateCurrentUser(userUpdatedInfos: any): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      const user = this.afAuth.currentUser.then((user) => {
+        user
+          ?.updateProfile({
+            displayName: userUpdatedInfos.name,
+            photoURL: userUpdatedInfos.photoURL,
+          })
+          .then(
+            (res) => {
+              console.log(res);
+              return resolve(res);
+            },
+            (err) => reject(err)
+          );
+      });
+    });
+  }
 
-  // getCurrentCategories(): string[] {
-  //   return this.categories;
-  // }
+  setCategories(originalCategories: string[]) {
+    this.categories = originalCategories;
+  }
+
+  getCurrentCategories(): string[] {
+    return this.categories;
+  }
 }

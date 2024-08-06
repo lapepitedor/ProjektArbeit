@@ -16,7 +16,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class AppComponent
 {
     title = 'expense-tracking';
-    // user: Observable<User>;
+
     loggedInSubscription: Subscription;
 
     constructor(private router: Router,
@@ -32,7 +32,7 @@ export class AppComponent
                 this.loginService.setUserId(authData.uid);
                 this.loginService.setUser(authData);
                 this.loginService.announceUserIdCreated('user created!');
-                // this.router.navigate(['main/dashboard']).then();
+               
             } else
             {
                 this.router.navigate(['/auth/login']).then();
@@ -42,44 +42,34 @@ export class AppComponent
 
     ngOnInit()
     {
-        // this.createRobot('sohaib', 'red', '12')
+       
     }
 
-    async createRobot(name: string, color: string, age: string)
-    {
-        // const docRef = await addDoc(collection(this.firestore.firestore, 'users/5dSBqBF21sUpvCZir46QjcdGv2H2/expenses'), {
-        //     email: "abc@gmail.com",
-        //     firstName: "Sohaib",
-        //     lastName: "Riaz",
-        //     password: "123123"
-        // });
-        // console.log("Document written with ID: ", docRef.id);
-
-        let list = await getDocs(collection(this.firestore.firestore, 'users'));
-        console.log(list.docs);
-
-        // this.parseData(list.docs);
-
-        const result = list.docs.map((d) => ({
-            id: d.id,
-            ...d.data()
-        }))
-        console.log('>>> Documents', result)
+    // async createRobot(name: string, color: string, age: string)
+    // {
+     
+    //     let list = await getDocs(collection(this.firestore.firestore, 'users'));
+    //     console.log(list.docs);
+    //     const result = list.docs.map((d) => ({
+    //         id: d.id,
+    //         ...d.data()
+    //     }))
+    //     console.log('>>> Documents', result)
 
 
-    }
+    // }
 
-    parseData(snapsShots: any)
-    {
-        const data: any = [];
-        snapsShots.forEach((snapshot: any) =>
-        {
-            const expense = snapshot.payload.exportVal();
-            expense.id = snapshot.key;
-            data.push(expense);
-        });
-        console.log(data);
-    }
+    // parseData(snapsShots: any)
+    // {
+    //     const data: any = [];
+    //     snapsShots.forEach((snapshot: any) =>
+    //     {
+    //         const expense = snapshot.payload.exportVal();
+    //         expense.id = snapshot.key;
+    //         data.push(expense);
+    //     });
+    //     console.log(data);
+    // }
 
     ngOnDestroy()
     {

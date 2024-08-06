@@ -52,7 +52,7 @@ export class RegisterComponent {
   signUp() {
     const { email, password, firstName, lastName } = this.registerForm.value;
     this.authService
-      .addUsers(email, password, firstName, lastName)
+      .doRegister(email, password, firstName, lastName)
       .then(() => {
         this.openSnackBar('Successful Registration!', '', 2000);
       })

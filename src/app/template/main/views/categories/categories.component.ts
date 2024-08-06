@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AddComponent } from './add/add.component';
-import { Firestore, addDoc, collection, getDocs, query, deleteDoc, updateDoc, getDoc, doc } from '@angular/fire/firestore';
+import { collection, getDocs, deleteDoc,  doc } from '@angular/fire/firestore';
 import { LoginService } from 'src/app/core/service/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -53,6 +53,8 @@ export class CategoriesComponent
     
     updateList()
     {
+        debugger 
+
         this.categoriesData = new MatTableDataSource<any>(this.categoryDataTable);
         this.categoriesData.paginator = this.paginator;
         this.categoriesData.sort = this.sort;

@@ -46,17 +46,11 @@ export class AddComponent implements OnInit
         }
     }
 
-    // updateExpenseCategories(category: string)
-    // {
-    //     this.categories = this.loginService.getCurrentCategories();
-    // }
-
     async saveCategoryEntry()
     {
         this.isLoading = true;
         const categoryObj = this.categoryForm.value;
 
-        console.log("categoryObj", categoryObj);
         let docRef;
 
         if (this.type == 'add')

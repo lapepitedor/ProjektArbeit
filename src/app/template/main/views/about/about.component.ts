@@ -44,7 +44,7 @@ export class AboutComponent implements OnInit
         let currentuser = users.find(user => (this.userId == user.id));
 
         this.user = { ...this.user, currentuser };
-        console.log("this.user",this.user);
+       
         
         this.isLoading = false;
     }
