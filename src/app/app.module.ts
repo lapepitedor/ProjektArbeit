@@ -8,9 +8,9 @@ import { firebaseConfig } from './app.firebase.config';
 
 //firebase
 import { AngularFireModule } from '@angular/fire/compat';
-//import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-//import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+
 import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 import { Firestore, FirestoreModule } from '@angular/fire/firestore';
@@ -18,25 +18,23 @@ import { Firestore, FirestoreModule } from '@angular/fire/firestore';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AuthGuard } from './core/service/auth.guard';
+import { NotFoundComponent } from './template/main/views/not-found/not-found.component';
 
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        AngularFireModule.initializeApp(firebaseConfig),
-        AngularFirestoreModule,
-        // FirestoreModule 
-        SharedModule,
-        provideFirestore(() => getFirestore()),
-        provideFirebaseApp(() => initializeApp(firebaseConfig))
-
-    ],
-    providers: [AuthGuard],
-    bootstrap: [AppComponent]
+  declarations: [AppComponent, NotFoundComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule,
+    // FirestoreModule
+    SharedModule,
+    provideFirestore(() => getFirestore()),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+  ],
+  providers: [AuthGuard],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

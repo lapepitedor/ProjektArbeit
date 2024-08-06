@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './template/main/main.component';
-import { AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/compat/auth-guard';
 import { AuthGuard } from './core/service/auth.guard';
 
 
@@ -23,7 +22,8 @@ const routes: Routes = [
       import('./template/main/main.module').then((m) => m.MainModule),
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth' },
+ 
 ];
 
 @NgModule({

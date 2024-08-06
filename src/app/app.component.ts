@@ -3,8 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from './core/service/login.service';
-
-import { Firestore, addDoc, collection, getDocs, query, deleteDoc, updateDoc, getDoc } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
@@ -45,31 +43,7 @@ export class AppComponent
        
     }
 
-    // async createRobot(name: string, color: string, age: string)
-    // {
-     
-    //     let list = await getDocs(collection(this.firestore.firestore, 'users'));
-    //     console.log(list.docs);
-    //     const result = list.docs.map((d) => ({
-    //         id: d.id,
-    //         ...d.data()
-    //     }))
-    //     console.log('>>> Documents', result)
 
-
-    // }
-
-    // parseData(snapsShots: any)
-    // {
-    //     const data: any = [];
-    //     snapsShots.forEach((snapshot: any) =>
-    //     {
-    //         const expense = snapshot.payload.exportVal();
-    //         expense.id = snapshot.key;
-    //         data.push(expense);
-    //     });
-    //     console.log(data);
-    // }
 
     ngOnDestroy()
     {
