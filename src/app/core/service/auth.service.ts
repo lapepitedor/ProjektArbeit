@@ -35,6 +35,7 @@ export class AuthService {
       })
       .catch((error) => {
         console.error('Error registering user:', error);
+         throw error; 
       });
   }
 

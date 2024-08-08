@@ -57,7 +57,14 @@ export class LoginComponent implements OnInit {
         this.snackBar.open('Login Successful!', '', { duration: 2000 });
         this.router.navigate(['/main/dashboard']);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        this.snackBar.open(
+          'email/password is incorrect.',
+          'ok',
+          { duration: 4000 }
+        );
+      });
   }
 
   onSubmit() {
