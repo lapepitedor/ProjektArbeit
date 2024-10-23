@@ -3,7 +3,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="col-sm-12">
-            <mat-card class="z-depth-5 p-3">
+            <mat-card>
               <mat-card-title>Login</mat-card-title>
               <mat-card-content>
                 <div class="col-sm-12">
@@ -20,13 +20,13 @@
                 </div>
               </mat-card-content>
               <mat-card-actions>
-                <div class="col-sm-12">
-                  <button class="col-sm-12 p-2" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">
+                <div>
+                  <button class="full-width-button p-2" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">
                     Login
                   </button>
                   <div class="col-sm-12 mt-2">
                     <span class="text-muted">Don't have an account?</span>
-                    <a (click)="signUp()" class="ml-1" style="cursor: pointer;">Sign up</a>
+                    <a (click)="signUp()" class="ml-1" style="cursor: pointer;"> Sign up</a>
                   </div>
                 </div>
               </mat-card-actions>

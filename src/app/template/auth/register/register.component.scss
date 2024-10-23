@@ -42,6 +42,15 @@
     .mat-card:not([class*=mat-elevation-z]) {
         box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
     }
+
+       .mdc-card__actions {
+      display: block !important;
+      flex-direction: row;
+      align-items: center;
+      box-sizing: border-box;
+      min-height: 52px;
+      padding: 8px;
+    }
 }
 
 .example-full-width {

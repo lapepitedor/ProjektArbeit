@@ -11,113 +11,121 @@ import { LoginService } from 'src/app/core/service/login.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 // import { AngularFirestore } from '@angular/fire/compat/firestore/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { TransactionService } from 'src/app/core/service/transaction.service';
 
 @Component({
-    selector: 'app-transaction',
-    templateUrl: './transaction.component.html',
-    styleUrls: ['./transaction.component.scss']
+  selector: 'app-transaction',
+  templateUrl: './transaction.component.html',
+  styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent
-{
-    @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-    @ViewChild('sorter', { static: true }) sort!: MatSort;
-    @Input() displayColumns: string[] = ['date', 'time', 'amount', 'category', 'expense_type', 'payment_type', 'comments', 'actions'];
+export class TransactionComponent {
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild('sorter', { static: true }) sort!: MatSort;
+  @Input() displayColumns: string[] = [
+    'date',
+    'time',
+    'amount',
+    'category',
+    'expense_type',
+    'payment_type',
+    'comments',
+    'actions',
+  ];
 
-    expensesData = new MatTableDataSource<any>();
+  expensesData = new MatTableDataSource<any>();
 
-    expenseDataTable: any[] = [];
-    userId: string = '';
-    isLoading: boolean = false;
+  expenseDataTable: any[] = [];
+  userId: string = '';
+  isLoading: boolean = false;
 
-    constructor(public dialog: MatDialog, private loginService: LoginService, public afs: AngularFirestore, private snackBar: MatSnackBar) { }
+  constructor(
+    public dialog: MatDialog,
+    private loginService: LoginService,
+    public afs: AngularFirestore,
+    private snackBar: MatSnackBar,
+    private transactionService: TransactionService
+  ) {}
 
-    ngOnInit()
-    {
-        this.userId = this.loginService.getUserId();
+  ngOnInit() {
+    this.userId = this.loginService.getUserId();
+    this.getExpenses();
+  }
+
+  async getExpenses() {
+    this.isLoading = true;
+    try {
+      this.expenseDataTable = await this.transactionService.getTransactions(
+        this.userId
+      );
+      this.updateList();
+    } catch (error) {
+      console.error('Error fetching expenses:', error);
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  updateList() {
+    this.expensesData = new MatTableDataSource<any>(this.expenseDataTable);
+    this.expensesData.paginator = this.paginator;
+    this.expensesData.sort = this.sort;
+    this.isLoading = false;
+  }
+
+  ngAfterViewInit() {
+    this.expensesData.sort = this.sort;
+  }
+
+  ngOnChanges(changes: any) {
+    if (!changes.data.firstChange) {
+      this.expensesData = new MatTableDataSource<any>(this.expenseDataTable);
+      this.expensesData.paginator = this.paginator;
+      this.expensesData.sort = this.sort;
+    }
+  }
+
+  isDataEmpty(): boolean {
+    return this.expenseDataTable.length === 0;
+  }
+
+  editData(expense: any) {
+    let df = this.dialog.open(AddComponent, { autoFocus: false });
+    df.componentInstance.type = 'edit';
+    df.componentInstance.editData = expense;
+    df.afterClosed().subscribe((result) => {
+      if (result) {
         this.getExpenses();
+      }
+    });
+  }
+  async deleteExpense(expense: any) {
+    try {   
+      await this.transactionService.deleteTransaction(this.userId, expense.id);
+      this.snackBar.open('Transaction record has been deleted.', 'ok', {
+        duration: 4000,
+      });
+      this.getExpenses();
+    } catch (error) {
+      console.error('Error deleting expense:', error);
     }
-
-    async getExpenses()
-    {
-        this.isLoading = true;
-        let list = await getDocs(collection(this.afs.firestore, `users/${this.userId}/expenses`));
-        console.log(list.docs);
-
-        let result = []
-        result = list.docs.map((d) => ({
-            id: d.id,
-            ...d.data()
-        }))
-     
-        this.expenseDataTable = result
-        this.updateList();
-    }
-    updateList()
-    {
-        this.expensesData = new MatTableDataSource<any>(this.expenseDataTable);
-        this.expensesData.paginator = this.paginator;
-        this.expensesData.sort = this.sort;
-        this.isLoading = false;
-    }
-
-    ngAfterViewInit()
-    {
-        this.expensesData.sort = this.sort;
-    }
-
-    ngOnChanges(changes: any)
-    {
-        if (!changes.data.firstChange)
-        {
-            this.expensesData = new MatTableDataSource<any>(this.expenseDataTable);
-            this.expensesData.paginator = this.paginator;
-            this.expensesData.sort = this.sort;
-        }
-    }
-
-    isDataEmpty(): boolean
-    {
-        return this.expenseDataTable.length === 0;
-    }
-
-    editData(expense: any)
-    {
-        let df = this.dialog.open(AddComponent, { autoFocus: false });
-        df.componentInstance.type = 'edit';
-        df.componentInstance.editData = expense;
-        df.afterClosed().subscribe(result =>
-        {
-            if (result)
-            {
-                this.getExpenses();
-            }
-        })
-    }
-
-    async deleteExpense(expense: any)
-    {
-        const expenseDocRef = doc(this.afs.firestore, `users/${this.userId}/expenses/${expense.id}`);
-        await deleteDoc(expenseDocRef);
-        this.snackBar.open("Transaction record has been deleted.", 'ok', { duration: 4000 });
+  }
+    
+  openDialogAddTransaction() {
+    debugger;
+    let dialog = this.dialog.open(AddComponent);
+    dialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.expenseDataTable.push(result);
         this.getExpenses();
-    }
+      }
+    });
+  }
 
-    addTransaction()
-    {
-        let df = this.dialog.open(AddComponent);
-        df.afterClosed().subscribe(result =>
-        {
-            if (result)
-            {
-                this.expenseDataTable.push(result);
-                this.getExpenses();
-            }
-        })
-    }
-
-    applyFilter(event: Event)
-    {
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.expensesData.filter = filterValue.trim().toLowerCase();
-    }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.expensesData.filter = filterValue.trim().toLowerCase();
+     if (this.expensesData.paginator) {
+       this.expensesData.paginator.firstPage();
+     }
+  }
 }

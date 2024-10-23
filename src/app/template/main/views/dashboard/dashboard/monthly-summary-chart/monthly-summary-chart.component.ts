@@ -95,35 +95,49 @@ export class MonthlySummaryChartComponent implements OnInit, OnChanges
 
     makeHighChart()
     {
-        Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
+        Highcharts.chart({
+          chart: {
+            renderTo: 'container', // Verwende renderTo, um den Container anzugeben
+            type: 'column',
+          },
+          title: {
+            text: 'Income vs Expense Monthly Chart',
+            align: 'left',
+          },
+
+          xAxis: {
+            categories: this.categories,
+            crosshair: true,
+          },
+          yAxis: {
+            min: 0,
             title: {
-                text: 'Income vs Expense Chart',
-                align: 'left'
+              text: 'Euro',
             },
-          
-            xAxis: {
-                categories: this.categories,
-                crosshair: true,
+          },
+          tooltip: {
+            valueSuffix: '€',
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0,
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Euro'
-                }
+          },
+          series: [
+            {
+              type: 'column', // Gib den Typ der Serie explizit an
+              name: 'Income',
+              data: this.chartData[0].data,
+              color: '#00FF00', // Optional: Farbe für Income (grün)
             },
-            tooltip: {
-                valueSuffix: '€'
+            {
+              type: 'column', // Gib den Typ der Serie explizit an
+              name: 'Expense',
+              data: this.chartData[1].data,
+              color: '#FF0000', // Farbe für Expense (rot)
             },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: this.chartData
+          ],
         });
     }
 }

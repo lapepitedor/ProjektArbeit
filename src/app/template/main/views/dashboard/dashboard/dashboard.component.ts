@@ -183,30 +183,30 @@ export class DashboardComponent implements OnInit {
     this.cardConfig[3].count = numOfEntries;
 
     this.metrics = [
-      {
-        color: 'money-icon',
-        value: firstDate.toDateString().slice(3, 15),
-        metricTitle: 'First Expense Date',
-        icon: 'today',
-      },
-      {
-        color: 'money-icon',
-        value: lastDate.toDateString().slice(3, 15),
-        metricTitle: 'Latest Expense Date',
-        icon: 'today',
-      },
-      {
-        color: 'money-icon',
-        value: numOfEntries,
-        metricTitle: 'Number of Expenses',
-        icon: 'receipt',
-      },
-      {
-        color: 'money-icon',
-        value: totalAmount,
-        metricTitle: 'Total Amount of Categories',
-        icon: 'attach_money',
-      },
+      // {
+      //   color: 'money-icon',
+      //   value: firstDate.toDateString().slice(3, 15),
+      //   metricTitle: 'First Expense Date',
+      //   icon: 'today',
+      // },
+      // {
+      //   color: 'money-icon',
+      //   value: lastDate.toDateString().slice(3, 15),
+      //   metricTitle: 'Latest Expense Date',
+      //   icon: 'today',
+      // },
+      // {
+      //   color: 'money-icon',
+      //   value: numOfEntries,
+      //   metricTitle: 'Number of Expenses',
+      //   icon: 'receipt',
+      // },
+      // {
+      //   color: 'money-icon',
+      //   value: totalAmount,
+      //   metricTitle: 'Total Amount of Categories',
+      //   icon: 'attach_money',
+      // },
     ];
 
     this.categories = parsedData
